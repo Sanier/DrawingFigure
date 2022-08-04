@@ -8,19 +8,15 @@
             Name = name;
         }
 
-        public static void DrawCircle(Graphics graphics, Point firstPoint, NumericUpDown radius)
+        public static void DrawCircle(Graphics graphics, Point firstPoint, NumericUpDown radius, NumericUpDown bold, TrackBar borderStyle, TrackBar figureStyle)
         {
-            //var width = secondPoint.X - firstPoint.X;
-            //var height = secondPoint.Y - firstPoint.Y;
-            Pen blackPen = new(Color.Black, 5);
+            Pen blackPen = new(Colorr.GetColor(borderStyle.Value), (int)bold.Value);
             var radius2 = radius.Value;
 
             var rectangle = new System.Drawing.Rectangle(firstPoint.X, firstPoint.Y, (int)radius.Value, (int)radius2);
-            //float startAngle = 360.0F;
-            //float sweepAngle = 360.0F;
-
-            
+            SolidBrush figureBrush = new SolidBrush(Colorr.GetColor(figureStyle.Value));
             graphics.DrawEllipse(blackPen,rectangle);
+            graphics.FillEllipse(figureBrush, rectangle);
 
             blackPen.Dispose();
         }

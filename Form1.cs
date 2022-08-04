@@ -37,6 +37,7 @@ namespace Drawing
                 new Rectangle(FigureType.Rectangle, "Прямоугольник"),
                 new Circle(FigureType.Circle, "Окружность"),
             };
+
             listBoxFigur.DisplayMember = nameof(IFigure.Name);
         }
 
@@ -49,9 +50,9 @@ namespace Drawing
 
         private void PanelCanvas_MouseUp(object sender, MouseEventArgs e)
         {
-            if (_selectedFigure == null) return;
+            //if (_selectedFigure == null) return;
 
-            _selectedFigure.SecondPoint = new Point(e.X, e.Y);
+            //_selectedFigure.SecondPoint = new Point(e.X, e.Y);
 
             //_IsDrawing = true;
             //panelCanvas.Refresh();
@@ -64,9 +65,7 @@ namespace Drawing
             switch (_selectedFigure.Type)
             {
                 case FigureType.Circle:
-                    
-                    //Circle.DrawCircle(e.Graphics, _selectedFigure.FirstPoint, _selectedFigure.SecondPoint);
-                    Circle.DrawCircle(e.Graphics, _selectedFigure.FirstPoint, Radius);
+                    Circle.DrawCircle(e.Graphics, _selectedFigure.FirstPoint, Radius, BoldLines, BorderStyle, FigureStyle);
                     RectangleSideA.Visible = false;
                     RectangleSideB.Visible = false;
                     TriangleSize.Visible = false;
@@ -74,8 +73,7 @@ namespace Drawing
                     break;
 
                 case FigureType.Triangle:
-                    //Triangle.DrawTriangle(e.Graphics, _selectedFigure.FirstPoint, _selectedFigure.SecondPoint);
-                    Triangle.DrawTriangle(e.Graphics, _selectedFigure.FirstPoint, TriangleSize);
+                    Triangle.DrawTriangle(e.Graphics, _selectedFigure.FirstPoint, TriangleSize, BoldLines, BorderStyle, FigureStyle);
                     RectangleSideA.Visible = false;
                     RectangleSideB.Visible = false;
                     Radius.Visible = false;
@@ -84,7 +82,7 @@ namespace Drawing
                     break;
 
                 case FigureType.Rectangle:
-                    Rectangle.DrawRectangle(e.Graphics, _selectedFigure.FirstPoint, RectangleSideA, RectangleSideB);
+                    Rectangle.DrawRectangle(e.Graphics, _selectedFigure.FirstPoint, RectangleSideA, RectangleSideB, BoldLines, BorderStyle, FigureStyle);
                     RectangleSideA.Visible = true;
                     RectangleSideB.Visible = true;
                     Radius.Visible = false;
@@ -134,7 +132,36 @@ namespace Drawing
         {
             if (_selectedFigure == null) return;
 
-            _selectedFigure.FirstPoint = new Point(100, 500);
+            _selectedFigure.FirstPoint = new Point(50, 500);
+
+            _IsDrawing = true;
+            panelCanvas.Refresh();
+        }
+
+        private void BoldLines_ValueChanged(object sender, EventArgs e)
+        {
+            if (_selectedFigure == null) return;
+
+            _IsDrawing = true;
+            panelCanvas.Refresh();
+        }
+
+        private void Label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FigureStyle_Scroll(object sender, EventArgs e)
+        {
+            if (_selectedFigure == null) return;
+
+            _IsDrawing = true;
+            panelCanvas.Refresh();
+        }
+
+        private void BorderStyle_Scroll(object sender, EventArgs e)
+        {
+            if (_selectedFigure == null) return;
 
             _IsDrawing = true;
             panelCanvas.Refresh();

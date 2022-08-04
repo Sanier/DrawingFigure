@@ -8,12 +8,14 @@
             Name = name;
         }
 
-        public static void DrawRectangle(Graphics graphics, Point firstPoint, NumericUpDown SideA, NumericUpDown SideB) //Point secondPoint
+        public static void DrawRectangle(Graphics graphics, Point firstPoint, NumericUpDown sideA, NumericUpDown sideB, NumericUpDown bold, TrackBar borderStyle, TrackBar figureStyle) //Point secondPoint
         {
-            var rectangle = new System.Drawing.Rectangle(firstPoint.X, firstPoint.Y, (int)SideA.Value, (int)SideB.Value);
+            var rectangle = new System.Drawing.Rectangle(firstPoint.X, firstPoint.Y, (int)sideA.Value, (int)sideB.Value);
 
-            Pen blackPen = new(Color.Black, 5);
+            Pen blackPen = new(Colorr.GetColor(borderStyle.Value), (int)bold.Value);
+            SolidBrush figureBrush = new SolidBrush(Colorr.GetColor(figureStyle.Value));
             graphics.DrawRectangle(blackPen, rectangle);
+            graphics.FillRectangle(figureBrush, rectangle);
             blackPen.Dispose();
         }
     }

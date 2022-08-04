@@ -8,7 +8,7 @@
             Name = name;
         }
 
-        public static void DrawTriangle(Graphics graphics, Point firstPoint, NumericUpDown triangleSize)
+        public static void DrawTriangle(Graphics graphics, Point firstPoint, NumericUpDown triangleSize, NumericUpDown bold, TrackBar borderStyle, TrackBar figureStyle)
         {
             var h = (Math.Sqrt(3) * (int)triangleSize.Value) / 2;
             Point[] myPointArray =
@@ -18,8 +18,11 @@
                 new Point(firstPoint.X + (int)triangleSize.Value, firstPoint.Y)
             };
 
-            Pen blackPen = new(Color.Black, 5);
+            Pen blackPen = new(Colorr.GetColor(borderStyle.Value), (int)bold.Value);
+            SolidBrush figureBrush = new SolidBrush(Colorr.GetColor(figureStyle.Value));
+
             graphics.DrawPolygon(blackPen, myPointArray);
+            graphics.FillPolygon(figureBrush, myPointArray);
 
             blackPen.Dispose();
         }

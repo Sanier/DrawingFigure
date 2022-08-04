@@ -34,10 +34,19 @@
             this.RectangleSideB = new System.Windows.Forms.NumericUpDown();
             this.TriangleSize = new System.Windows.Forms.NumericUpDown();
             this.Radius = new System.Windows.Forms.NumericUpDown();
+            this.BoldLines = new System.Windows.Forms.NumericUpDown();
+            this.BoldLinesName = new System.Windows.Forms.Label();
+            this.BorderStyleName = new System.Windows.Forms.Label();
+            this.BorderStyle = new System.Windows.Forms.TrackBar();
+            this.FigureStyle = new System.Windows.Forms.TrackBar();
+            this.FigureStyleName = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.RectangleSideA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RectangleSideB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TriangleSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Radius)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BoldLines)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BorderStyle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FigureStyle)).BeginInit();
             this.SuspendLayout();
             // 
             // listBoxFigur
@@ -103,7 +112,7 @@
             // 
             this.TriangleSize.Location = new System.Drawing.Point(12, 124);
             this.TriangleSize.Maximum = new decimal(new int[] {
-            450,
+            600,
             0,
             0,
             0});
@@ -119,7 +128,7 @@
             // 
             // Radius
             // 
-            this.Radius.Location = new System.Drawing.Point(12, 124);
+            this.Radius.Location = new System.Drawing.Point(12, 162);
             this.Radius.Maximum = new decimal(new int[] {
             450,
             0,
@@ -135,9 +144,75 @@
             0});
             this.Radius.ValueChanged += new System.EventHandler(this.Radius_ValueChanged);
             // 
+            // BoldLines
+            // 
+            this.BoldLines.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.BoldLines.Location = new System.Drawing.Point(12, 218);
+            this.BoldLines.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.BoldLines.Name = "BoldLines";
+            this.BoldLines.Size = new System.Drawing.Size(179, 23);
+            this.BoldLines.TabIndex = 6;
+            this.BoldLines.ValueChanged += new System.EventHandler(this.BoldLines_ValueChanged);
+            // 
+            // BoldLinesName
+            // 
+            this.BoldLinesName.AutoSize = true;
+            this.BoldLinesName.Location = new System.Drawing.Point(46, 200);
+            this.BoldLinesName.Name = "BoldLinesName";
+            this.BoldLinesName.Size = new System.Drawing.Size(96, 15);
+            this.BoldLinesName.TabIndex = 7;
+            this.BoldLinesName.Text = "Толщина линии";
+            // 
+            // BorderStyleName
+            // 
+            this.BorderStyleName.AutoSize = true;
+            this.BorderStyleName.Location = new System.Drawing.Point(46, 258);
+            this.BorderStyleName.Name = "BorderStyleName";
+            this.BorderStyleName.Size = new System.Drawing.Size(93, 15);
+            this.BorderStyleName.TabIndex = 8;
+            this.BorderStyleName.Text = "Цвет окантовки";
+            // 
+            // BorderStyle
+            // 
+            this.BorderStyle.Location = new System.Drawing.Point(12, 276);
+            this.BorderStyle.Maximum = 765;
+            this.BorderStyle.Name = "BorderStyle";
+            this.BorderStyle.Size = new System.Drawing.Size(179, 45);
+            this.BorderStyle.TabIndex = 9;
+            this.BorderStyle.Scroll += new System.EventHandler(this.BorderStyle_Scroll);
+            // 
+            // FigureStyle
+            // 
+            this.FigureStyle.Location = new System.Drawing.Point(15, 346);
+            this.FigureStyle.Maximum = 765;
+            this.FigureStyle.Name = "FigureStyle";
+            this.FigureStyle.Size = new System.Drawing.Size(179, 45);
+            this.FigureStyle.TabIndex = 11;
+            this.FigureStyle.Scroll += new System.EventHandler(this.FigureStyle_Scroll);
+            // 
+            // FigureStyleName
+            // 
+            this.FigureStyleName.AutoSize = true;
+            this.FigureStyleName.Location = new System.Drawing.Point(49, 328);
+            this.FigureStyleName.Name = "FigureStyleName";
+            this.FigureStyleName.Size = new System.Drawing.Size(79, 15);
+            this.FigureStyleName.TabIndex = 10;
+            this.FigureStyleName.Text = "Цвет фигуры";
+            this.FigureStyleName.Click += new System.EventHandler(this.Label1_Click);
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(927, 552);
+            this.Controls.Add(this.FigureStyle);
+            this.Controls.Add(this.FigureStyleName);
+            this.Controls.Add(this.BorderStyle);
+            this.Controls.Add(this.BorderStyleName);
+            this.Controls.Add(this.BoldLinesName);
+            this.Controls.Add(this.BoldLines);
             this.Controls.Add(this.Radius);
             this.Controls.Add(this.TriangleSize);
             this.Controls.Add(this.RectangleSideB);
@@ -149,7 +224,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.RectangleSideB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TriangleSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Radius)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BoldLines)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BorderStyle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FigureStyle)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -161,5 +240,11 @@
         private NumericUpDown RectangleSideB;
         private NumericUpDown TriangleSize;
         private NumericUpDown Radius;
+        private NumericUpDown BoldLines;
+        private Label BoldLinesName;
+        private Label BorderStyleName;
+        private TrackBar BorderStyle;
+        private TrackBar FigureStyle;
+        private Label FigureStyleName;
     }
 }
