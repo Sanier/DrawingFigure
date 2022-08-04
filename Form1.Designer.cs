@@ -28,28 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBoxFigure = new System.Windows.Forms.ListBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.listBoxFigur = new System.Windows.Forms.ListBox();
+            this.panelCanvas = new System.Windows.Forms.Panel();
             this.SuspendLayout();
-            // 
-            // listBoxFigure
-            // 
-            this.listBoxFigure.FormattingEnabled = true;
-            this.listBoxFigure.ItemHeight = 15;
-            this.listBoxFigure.Location = new System.Drawing.Point(12, 12);
-            this.listBoxFigure.Name = "listBoxFigure";
-            this.listBoxFigure.Size = new System.Drawing.Size(129, 154);
-            this.listBoxFigure.TabIndex = 0;
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 15;
-            this.listBox1.Location = new System.Drawing.Point(9, 18);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(120, 94);
-            this.listBox1.TabIndex = 0;
             // 
             // listBoxFigur
             // 
@@ -61,9 +42,21 @@
             this.listBoxFigur.TabIndex = 0;
             this.listBoxFigur.SelectedIndexChanged += new System.EventHandler(this.listBoxFigur_SelectedIndexChanged);
             // 
+            // panelCanvas
+            // 
+            this.panelCanvas.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.panelCanvas.Location = new System.Drawing.Point(225, 12);
+            this.panelCanvas.Name = "panelCanvas";
+            this.panelCanvas.Size = new System.Drawing.Size(690, 528);
+            this.panelCanvas.TabIndex = 1;
+            this.panelCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.panelCanvas_Paint);
+            this.panelCanvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelCanvas_MouseDown);
+            this.panelCanvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelCanvas_MouseUp);
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(927, 552);
+            this.Controls.Add(this.panelCanvas);
             this.Controls.Add(this.listBoxFigur);
             this.Name = "Form1";
             this.ResumeLayout(false);
@@ -72,8 +65,7 @@
 
         #endregion
 
-        private ListBox listBoxFigure;
-        private ListBox listBox1;
         private ListBox listBoxFigur;
+        private Panel panelCanvas;
     }
 }

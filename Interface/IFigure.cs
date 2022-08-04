@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Drawing
+﻿namespace Drawing
 {
     public interface IFigure
     {
@@ -12,6 +6,8 @@ namespace Drawing
         public String Name { get; }
         public Point FirstPoint { get; set; }
         public Point SecondPoint { get; set; }
+        public Color FrameColor { get; }
+        public Color FigureColor { get; }
 
     }
 }
