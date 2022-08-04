@@ -63,10 +63,11 @@ namespace Drawing
             switch (_selectedFigure.Type)
             {
                 case FigureType.Circle:
-
+                    _selectedCircle.DrawCircle(e.Graphics, _selectedFigure.FirstPoint, _selectedFigure.SecondPoint);
                     break;
 
                 case FigureType.Triangle:
+                    _selectedTriangle.DrawTriangle(e.Graphics, _selectedFigure.FirstPoint, _selectedFigure.SecondPoint);
                     break;
 
                 case FigureType.Rectangle:
@@ -78,4 +79,3 @@ namespace Drawing
             }
         }
     }
-}

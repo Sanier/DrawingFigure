@@ -7,18 +7,19 @@
             Name = name;
         }
 
-        public void DrawTriangle(Graphics graphics, Point firstPoint, Point secondPoint, Point thirdPoint)
+        public void DrawTriangle(Graphics graphics, Point firstPoint, Point secondPoint)
         {
             Point[] myPointArray =
             {
-                new Point(firstPoint.X, firstPoint.Y),
+                new Point(firstPoint.X, secondPoint.Y),
                 new Point(secondPoint.X, secondPoint.Y),
-                new Point(thirdPoint.X, thirdPoint.Y)
+                new Point((secondPoint.X - firstPoint.X) / 2, firstPoint.Y)
             };
 
-            var triangle = graphics;
             Pen blackPen = new(Color.Black, 5);
-            triangle.DrawPolygon(blackPen, myPointArray);
+            Graphics.DrawPolygon(blackPen, myPointArray);
+
+            blackPen.Dispose();
         }
     }
 }
