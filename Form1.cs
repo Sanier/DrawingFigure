@@ -6,11 +6,6 @@ namespace Drawing
     public partial class Form1 : Form
     {
         private IFigure _selectedFigure;
-
-        private readonly Rectangle _selectedRectangle;
-        private readonly Triangle _selectedTriangle;
-        private readonly Circle _selectedCircle;
-
         private bool _IsDrawing;
 
         public Form1()
@@ -18,13 +13,19 @@ namespace Drawing
             InitializeComponent();
 
             SetDataToListBox();
+
+            listBoxFigur.SelectedIndexChanged += ListBoxFigur_SelectedIndexChanged;
+            panelCanvas.Paint += PanelCanvas_Paint;
+            panelCanvas.MouseClick += PanelCanvas_MouseClick;
+
+            this.CenterToScreen();
         }
 
-        private void listBoxFigur_SelectedIndexChanged(object sender, EventArgs e)
+        private void ListBoxFigur_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listBoxFigur.SelectedItems == null) return;
 
-            _selectedFigure = listBoxFigur.SelectedItem as IFigure;
+            _selectedFigure = (IFigure)listBoxFigur.SelectedItem;
         }
 
         //Заполнение списка
@@ -39,43 +40,104 @@ namespace Drawing
             listBoxFigur.DisplayMember = nameof(IFigure.Name);
         }
 
-        private void panelCanvas_MouseDown(object sender, MouseEventArgs e)
+        private void PanelCanvas_MouseDown(object sender, MouseEventArgs e)
         {
             if (_selectedFigure == null) return;
 
             _selectedFigure.FirstPoint = new Point(e.X, e.Y);
         }
 
-        private void panelCanvas_MouseUp(object sender, MouseEventArgs e)
+        private void PanelCanvas_MouseUp(object sender, MouseEventArgs e)
         {
             if (_selectedFigure == null) return;
 
             _selectedFigure.SecondPoint = new Point(e.X, e.Y);
 
-            _IsDrawing = true;
-            panelCanvas.Refresh();
+            //_IsDrawing = true;
+            //panelCanvas.Refresh();
         }
 
-        private void panelCanvas_Paint(object sender, PaintEventArgs e)
+        private void PanelCanvas_Paint(object sender, PaintEventArgs e)
         {
             if (!_IsDrawing) return;
 
             switch (_selectedFigure.Type)
             {
                 case FigureType.Circle:
-                    _selectedCircle.DrawCircle(e.Graphics, _selectedFigure.FirstPoint, _selectedFigure.SecondPoint);
+                    
+                    //Circle.DrawCircle(e.Graphics, _selectedFigure.FirstPoint, _selectedFigure.SecondPoint);
+                    Circle.DrawCircle(e.Graphics, _selectedFigure.FirstPoint, Radius);
+                    RectangleSideA.Visible = false;
+                    RectangleSideB.Visible = false;
+                    TriangleSize.Visible = false;
+                    Radius.Visible = true;
                     break;
 
                 case FigureType.Triangle:
-                    _selectedTriangle.DrawTriangle(e.Graphics, _selectedFigure.FirstPoint, _selectedFigure.SecondPoint);
+                    //Triangle.DrawTriangle(e.Graphics, _selectedFigure.FirstPoint, _selectedFigure.SecondPoint);
+                    Triangle.DrawTriangle(e.Graphics, _selectedFigure.FirstPoint, TriangleSize);
+                    RectangleSideA.Visible = false;
+                    RectangleSideB.Visible = false;
+                    Radius.Visible = false;
+                    TriangleSize.Visible = true;
+                    _IsDrawing = true;
                     break;
 
                 case FigureType.Rectangle:
-                    _selectedRectangle.DrawRectangle(e.Graphics, _selectedFigure.FirstPoint, _selectedFigure.SecondPoint);
-                    break;
-
-                default:
+                    Rectangle.DrawRectangle(e.Graphics, _selectedFigure.FirstPoint, RectangleSideA, RectangleSideB);
+                    RectangleSideA.Visible = true;
+                    RectangleSideB.Visible = true;
+                    Radius.Visible = false;
+                    TriangleSize.Visible = false;
                     break;
             }
+
+            _IsDrawing = false;
+        }
+
+        private void PanelCanvas_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void RectangleSideA_ValueChanged(object sender, EventArgs e)
+        {
+            if (_selectedFigure == null) return;
+
+            _selectedFigure.FirstPoint = new Point(50, 50);
+
+            _IsDrawing = true;
+            panelCanvas.Refresh();
+        }
+
+        private void RectangleSideB_ValueChanged(object sender, EventArgs e)
+        {
+            if (_selectedFigure == null) return;
+
+            _selectedFigure.FirstPoint = new Point(50, 50);
+
+            _IsDrawing = true;
+            panelCanvas.Refresh();
+        }
+
+        private void Radius_ValueChanged(object sender, EventArgs e)
+        {
+            if (_selectedFigure == null) return;
+
+            _selectedFigure.FirstPoint = new Point(50, 50);
+
+            _IsDrawing = true;
+            panelCanvas.Refresh();
+        }
+
+        private void TriangleSize_ValueChanged(object sender, EventArgs e)
+        {
+            if (_selectedFigure == null) return;
+
+            _selectedFigure.FirstPoint = new Point(100, 500);
+
+            _IsDrawing = true;
+            panelCanvas.Refresh();
         }
     }
+}

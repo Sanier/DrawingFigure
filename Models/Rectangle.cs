@@ -4,17 +4,15 @@
     {
         public Rectangle(FigureType figureType, string name) : base(FigureType.Rectangle, "Прямоугольник")
         {
+            Type = figureType;
             Name = name;
         }
 
-        public void DrawRectangle(Graphics graphics, Point firstPoint, Point secondPoint)
+        public static void DrawRectangle(Graphics graphics, Point firstPoint, NumericUpDown SideA, NumericUpDown SideB) //Point secondPoint
         {
-            var width = secondPoint.X - firstPoint.X;
-            var height = secondPoint.Y - firstPoint.Y;
+            var rectangle = new System.Drawing.Rectangle(firstPoint.X, firstPoint.Y, (int)SideA.Value, (int)SideB.Value);
 
-            var rectangle = new System.Drawing.Rectangle(firstPoint.X, firstPoint.Y, width, height);
-
-            Pen blackPen = new Pen(Color.Black, 5);
+            Pen blackPen = new(Color.Black, 5);
             graphics.DrawRectangle(blackPen, rectangle);
             blackPen.Dispose();
         }

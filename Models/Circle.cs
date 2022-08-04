@@ -4,21 +4,23 @@
     {
         public Circle(FigureType figureType, string name) : base(FigureType.Circle, "Окружность")
         {
+            Type = figureType;
             Name = name;
         }
 
-        public void DrawCircle(Graphics graphics, Point firstPoint, Point secondPoint)
+        public static void DrawCircle(Graphics graphics, Point firstPoint, NumericUpDown radius)
         {
-            var width = secondPoint.X - firstPoint.X;
-            var height = secondPoint.Y - firstPoint.Y;
-
-            var rectangle = new System.Drawing.Rectangle(firstPoint.X, firstPoint.Y, width, height);
-            float startAngle = 0.0F;
-            float sweepAngle = 45.0F;
-
+            //var width = secondPoint.X - firstPoint.X;
+            //var height = secondPoint.Y - firstPoint.Y;
             Pen blackPen = new(Color.Black, 5);
+            var radius2 = radius.Value;
 
-            Graphics.DrawPie(blackPen, rectangle, startAngle, sweepAngle);
+            var rectangle = new System.Drawing.Rectangle(firstPoint.X, firstPoint.Y, (int)radius.Value, (int)radius2);
+            //float startAngle = 360.0F;
+            //float sweepAngle = 360.0F;
+
+            
+            graphics.DrawEllipse(blackPen,rectangle);
 
             blackPen.Dispose();
         }
