@@ -13,10 +13,5 @@
         public FigureType Type { get; protected set; }
         public string Name { get; protected set; }
         public Point FirstPoint { get; set; }
-        public Point SecondPoint { get; set; }
-
-        public Color FrameColor { get; set; }
-
-        public Color FigureColor { get; set; }
     }
 }

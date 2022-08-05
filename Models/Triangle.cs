@@ -1,4 +1,4 @@
-﻿namespace Drawing
+﻿namespace Drawing.Models
 {
     public class Triangle : Figure
     {
@@ -19,7 +19,7 @@
             };
 
             Pen blackPen = new(Colorr.GetColor(borderStyle.Value), (int)bold.Value);
-            SolidBrush figureBrush = new SolidBrush(Colorr.GetColor(figureStyle.Value));
+            SolidBrush figureBrush = new(Colorr.GetColor(figureStyle.Value));
 
             graphics.DrawPolygon(blackPen, myPointArray);
             graphics.FillPolygon(figureBrush, myPointArray);

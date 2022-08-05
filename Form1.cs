@@ -1,5 +1,4 @@
-using System.Drawing;
-using System.Windows.Forms;
+using Drawing.Models;
 
 namespace Drawing
 {
@@ -17,6 +16,7 @@ namespace Drawing
             listBoxFigur.SelectedIndexChanged += ListBoxFigur_SelectedIndexChanged;
             panelCanvas.Paint += PanelCanvas_Paint;
             panelCanvas.MouseClick += PanelCanvas_MouseClick;
+            Models.Rectangle.MouseClick += new System.Windows.Forms.MouseEventHandler(Rectangle_MouseClick);
 
             this.CenterToScreen();
         }
@@ -34,7 +34,7 @@ namespace Drawing
             listBoxFigur.DataSource = new List<IFigure>
             {
                 new Triangle(FigureType.Triangle, "Треугольник"),
-                new Rectangle(FigureType.Rectangle, "Прямоугольник"),
+                new Models.Rectangle(FigureType.Rectangle, "Прямоугольник"),
                 new Circle(FigureType.Circle, "Окружность"),
             };
 
@@ -82,7 +82,7 @@ namespace Drawing
                     break;
 
                 case FigureType.Rectangle:
-                    Rectangle.DrawRectangle(e.Graphics, _selectedFigure.FirstPoint, RectangleSideA, RectangleSideB, BoldLines, BorderStyle, FigureStyle);
+                    Models.Rectangle.DrawRectangle(e.Graphics, _selectedFigure.FirstPoint, RectangleSideA, RectangleSideB, BoldLines, BorderStyle, FigureStyle);
                     RectangleSideA.Visible = true;
                     RectangleSideB.Visible = true;
                     Radius.Visible = false;
@@ -95,7 +95,42 @@ namespace Drawing
 
         private void PanelCanvas_MouseClick(object sender, MouseEventArgs e)
         {
+            Point X = _selectedFigure.FirstPoint;
+            var h = (Math.Sqrt(3) * (int)TriangleSize.Value) / 2;
+            if (RectangleSideA.Visible == true)
+            {
+                if ((X.X <= e.X && e.X <= RectangleSideA.Value + 50) && (X.Y <= e.Y && e.Y <= RectangleSideB.Value + 50))
+                {
+                    MessageBox.Show(e.Location.ToString() + "Точка лежит в примитиве");
+                }
+                else
+                {
+                    MessageBox.Show(e.Location.ToString() + "Точка не лежит в примитиве");
 
+                }
+            }
+            else if (TriangleSize.Visible == true)
+            {
+                if ((50 <= e.X && e.X <= TriangleSize.Value + 50) && (500 - (int)h <= e.Y && e.Y <= 500))
+                {
+                    MessageBox.Show(e.Location.ToString() + "Точка лежит в примитиве");
+                }
+                else
+                {
+                    MessageBox.Show(e.Location.ToString() + "Точка не лежит в примитиве");
+                }
+            }
+            else
+            {
+                if ((50 <= e.X && e.X <= Radius.Value + 50) && (50 <= e.Y && e.Y <= Radius.Value + 50)) 
+                {
+                    MessageBox.Show(e.Location.ToString() + "Точка лежит в примитиве");
+                }
+                else
+                {
+                    MessageBox.Show(e.Location.ToString() + "Точка не лежит в примитиве");
+                }
+            }
         }
 
         private void RectangleSideA_ValueChanged(object sender, EventArgs e)
@@ -165,6 +200,16 @@ namespace Drawing
 
             _IsDrawing = true;
             panelCanvas.Refresh();
+        }
+
+        private void Form1_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void Rectangle_MouseClick(object sender, MouseEventArgs e)
+        {
+            
         }
     }
 }

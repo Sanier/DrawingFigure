@@ -220,6 +220,7 @@
             this.Controls.Add(this.panelCanvas);
             this.Controls.Add(this.listBoxFigur);
             this.Name = "Form1";
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseClick);
             ((System.ComponentModel.ISupportInitialize)(this.RectangleSideA)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RectangleSideB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TriangleSize)).EndInit();
